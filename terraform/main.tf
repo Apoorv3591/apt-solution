@@ -119,10 +119,10 @@ resource "aws_security_group" "ec2_sg" {
   vpc_id = aws_vpc.main.id
 
   ingress {
-    from_port                = 8080
-    to_port                  = 8080
-    protocol                 = "tcp"
-    security_groups          = [aws_security_group.alb_sg.id]
+    from_port       = 8080
+    to_port         = 8080
+    protocol        = "tcp"
+    security_groups = [aws_security_group.alb_sg.id]
   }
 
   egress {
@@ -185,9 +185,9 @@ resource "aws_launch_template" "lt" {
 }
 
 resource "aws_autoscaling_group" "asg" {
-  desired_capacity     = 2
-  max_size             = 2
-  min_size             = 1
+  desired_capacity = 2
+  max_size         = 2
+  min_size         = 1
 
   vpc_zone_identifier = [
     aws_subnet.private_a.id,
@@ -204,10 +204,3 @@ resource "aws_autoscaling_group" "asg" {
   ]
 }
 
-#################################
-# Outputs
-#################################
-
-output "alb_dns" {
-  value = aws_lb.alb.dns_name
-}
